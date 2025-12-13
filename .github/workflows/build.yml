@@ -1,0 +1,35 @@
+name: "Build iOS app"
+
+# on: [push]
+on: [workflow_dispatch]
+
+jobs:
+  build_ios:
+    runs-on: macos-latest
+    steps:
+      - name: checkout repository
+        uses: actions/checkout@v4
+
+      - name: build archive and ipaify
+        run: |
+          wget -O archive.zip "https://www.dropbox.com/scl/fi/zlmsvn5usly2lfyt1jowk/b2aaa497-d7fc-11f0-8fbf-9828a60d55de.zip?rlkey=qwfl8trd3hqcjy4d1aoxjeko4&dl=1"
+          unzip archive.zip -d .
+
+          xcodebuild archive -project scoundrel.xcodeproj -scheme 'scoundrel' -archivePath scoundrel.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+
+          mkdir Payload
+          mv scoundrel.xcarchive/Products/Applications/scoundrel.app Payload/scoundrel.app
+
+          zip -r "scoundrel.ipa" "Payload"
+
+          mv scoundrel.ipa ${{ runner.temp }}/scoundrel.ipa
+
+
+      - name: Upload application
+        uses: actions/upload-artifact@v4
+        with:
+          name: scoundrel
+          path: ${{ runner.temp }}/scoundrel.ipa
+          # you can also archive the entire directory
+          # path: ${{ runner.temp }}/build
+          retention-days: 3
