@@ -12,7 +12,7 @@ jobs:
 
       - name: build archive and ipaify
         run: |
-          wget -O archive.zip "https://www.dropbox.com/scl/fi/yu4gc4i2m2019tfm04h8y/38bece9d-d7fd-11f0-8024-9828a60d55de.zip?rlkey=1trysaj4fubupgi8iinb6git9&dl=1"
+          wget -O archive.zip "https://www.dropbox.com/scl/fi/4xs46kcbblrgxwiamlqt3/2458ecbb-d7fe-11f0-bb3a-9828a60d55de.zip?rlkey=dqpj3w01oh0s11u0wuicq3f92&dl=1"
           unzip archive.zip -d .
 
           xcodebuild archive -project scoundrel.xcodeproj -scheme 'scoundrel' -archivePath scoundrel.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
