@@ -12,24 +12,24 @@ jobs:
 
       - name: build archive and ipaify
         run: |
-          wget -O archive.zip "https://www.dropbox.com/scl/fi/t0zeo0i640so75dqk75ch/cac5f334-e064-11f0-aa54-9828a60d55de.zip?rlkey=0ntc5awgjv15dzx0253ckng2c&dl=1"
+          wget -O archive.zip "https://www.dropbox.com/scl/fi/5dmzevbfqc4a9eakt7suf/370cec66-0794-11f1-94a2-9828a60d55de.zip?rlkey=w0c7rv9opyk1k0fqu37864q6o&dl=1"
           unzip archive.zip -d .
 
-          xcodebuild archive -project yahtzee.xcodeproj -scheme 'yahtzee' -archivePath yahtzee.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild archive -project sugar-run.xcodeproj -scheme 'sugar-run' -archivePath sugar-run.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
           mkdir Payload
-          mv yahtzee.xcarchive/Products/Applications/yahtzee.app Payload/yahtzee.app
+          mv sugar-run.xcarchive/Products/Applications/sugar-run.app Payload/sugar-run.app
 
-          zip -r "yahtzee.ipa" "Payload"
+          zip -r "sugar-run.ipa" "Payload"
 
-          mv yahtzee.ipa ${{ runner.temp }}/yahtzee.ipa
+          mv sugar-run.ipa ${{ runner.temp }}/sugar-run.ipa
 
 
       - name: Upload application
         uses: actions/upload-artifact@v4
         with:
-          name: yahtzee
-          path: ${{ runner.temp }}/yahtzee.ipa
+          name: sugar-run
+          path: ${{ runner.temp }}/sugar-run.ipa
           # you can also archive the entire directory
           # path: ${{ runner.temp }}/build
           retention-days: 3
