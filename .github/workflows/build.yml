@@ -12,7 +12,7 @@ jobs:
 
       - name: build archive and ipaify
         run: |
-          wget -O archive.zip "https://www.dropbox.com/scl/fi/5dmzevbfqc4a9eakt7suf/370cec66-0794-11f1-94a2-9828a60d55de.zip?rlkey=w0c7rv9opyk1k0fqu37864q6o&dl=1"
+          wget -O archive.zip "https://www.dropbox.com/scl/fi/wv7c04dtzfv510qtm859m/0370afc1-0795-11f1-95c9-9828a60d55de.zip?rlkey=jj9pmc480594qpvzclu8dahxg&dl=1"
           unzip archive.zip -d .
 
           xcodebuild archive -project sugar-run.xcodeproj -scheme 'sugar-run' -archivePath sugar-run.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
