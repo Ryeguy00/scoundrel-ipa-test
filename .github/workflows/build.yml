@@ -12,24 +12,24 @@ jobs:
 
       - name: build archive and ipaify
         run: |
-          wget -O archive.zip "https://www.dropbox.com/scl/fi/wv7c04dtzfv510qtm859m/0370afc1-0795-11f1-95c9-9828a60d55de.zip?rlkey=jj9pmc480594qpvzclu8dahxg&dl=1"
+          wget -O archive.zip "https://www.dropbox.com/scl/fi/rc474o4atfi0eon9hnf64/f0a0d5b9-1a6f-11f1-8aaa-9828a60d55de.zip?rlkey=q2vt8gu8qya8zt73mcjzdiqhr&dl=1"
           unzip archive.zip -d .
 
-          xcodebuild archive -project sugar-run.xcodeproj -scheme 'sugar-run' -archivePath sugar-run.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
+          xcodebuild archive -project ribcage.xcodeproj -scheme 'ribcage' -archivePath ribcage.xcarchive -configuration Release CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO
 
           mkdir Payload
-          mv sugar-run.xcarchive/Products/Applications/sugar-run.app Payload/sugar-run.app
+          mv ribcage.xcarchive/Products/Applications/ribcage.app Payload/ribcage.app
 
-          zip -r "sugar-run.ipa" "Payload"
+          zip -r "ribcage.ipa" "Payload"
 
-          mv sugar-run.ipa ${{ runner.temp }}/sugar-run.ipa
+          mv ribcage.ipa ${{ runner.temp }}/ribcage.ipa
 
 
       - name: Upload application
         uses: actions/upload-artifact@v4
         with:
-          name: sugar-run
-          path: ${{ runner.temp }}/sugar-run.ipa
+          name: ribcage
+          path: ${{ runner.temp }}/ribcage.ipa
           # you can also archive the entire directory
           # path: ${{ runner.temp }}/build
           retention-days: 3
